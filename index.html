@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Juego: 100 Cartas Editables</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <h1>100 Cartas Editables</h1>
+    <div class="controls">
+      <button id="toggleEdit" class="btn">Editar tarjetas: <span id="editState">OFF</span></button>
+      <button id="saveJSON" class="btn">Guardar JSON</button>
+      <label class="btn file-label">
+        Cargar JSON
+        <input id="loadJSON" type="file" accept="application/json" hidden/>
+      </label>
+      <button id="resetAll" class="btn danger">Reset</button>
+    </div>
+  </header>
+
+  <main>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <!-- Editor Modal -->
+  <div id="editor" class="editor hidden" aria-hidden="true">
+    <div class="editor-card">
+      <div class="editor-header">
+        <h2>Editar carta <span id="editorIndex"></span></h2>
+        <button id="closeEditor" class="icon-btn" aria-label="Cerrar">×</button>
+      </div>
+      <div class="editor-body">
+        <label class="field">
+          <span>Texto (lado B):</span>
+          <textarea id="textInput" rows="3" placeholder="Escribe el texto de la carta"></textarea>
+        </label>
+        <label class="field">
+          <span>URL de imagen (lado A):</span>
+          <input id="imageInput" type="url" placeholder="https://..."/>
+          <small>Consejo: usa enlaces https directos a imágenes (PNG/JPG/GIF).</small>
+        </label>
+        <div class="editor-actions">
+          <button id="saveCard" class="btn primary">Guardar carta</button>
+          <button id="flipPreview" class="btn">Previsualizar giro</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>
+      Click en una carta para voltearla (modo juego). Activa <em>Editar tarjetas</em> para modificar texto e imagen.
+      Los cambios se guardan automáticamente en este navegador.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+*{box-sizing:border-box} :root{
+  --bg: #0b1020;
+  --panel: #131a2a;
+  --muted: #8aa0b3;
+  --text: #e6eef6;
+  --accent: #7cc4ff;
+  --accent-2: #a7f3d0;
+  --danger: #ff6b6b;
+  --card: #101728;
+  --radius: 18px;
+  --shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Noto Sans, "Helvetica Neue", sans-serif;
+  background: radial-gradient(1000px 600px at 30% -10%, #18324d, transparent), var(--bg);
+  color: var(--text);
+}
+.topbar{
+  position: sticky; top:0; z-index:10;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; padding:1rem 1.25rem; background:rgba(19,26,42,.8); backdrop-filter:saturate(120%) blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.topbar h1{margin:0; font-size: clamp(1.1rem, 1.6vw, 1.6rem); letter-spacing:.5px}
+.controls{display:flex; gap:.5rem; flex-wrap:wrap}
+.btn{
+  appearance:none; border:none; cursor:pointer;
+  padding:.6rem .9rem; border-radius:12px; background:#1b2438; color:var(--text);
+  box-shadow: var(--shadow); transition:.2s transform, .2s background, .2s opacity;
+  font-weight:600; letter-spacing:.2px;
+}
+.btn:hover{ transform: translateY(-1px); background:#24304b }
+.btn.primary{ background: linear-gradient(135deg, #2b7cff, #3fc1ff) }
+.btn.danger{ background: linear-gradient(135deg, #ff5959, #ff8f8f) }
+.file-label{ position:relative; overflow:hidden }
+.file-label input{ position:absolute; inset:0; opacity:0; cursor:pointer }
+.grid{
+  --cols: 10;
+  display:grid; gap:12px;
+  padding:1rem; max-width:1200px; margin: 0 auto;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+@media (max-width: 1100px){ .grid{ --cols: 8 } }
+@media (max-width: 900px){ .grid{ --cols: 6 } }
+@media (max-width: 700px){ .grid{ --cols: 5 } }
+@media (max-width: 560px){ .grid{ --cols: 4 } }
+@media (max-width: 440px){ .grid{ --cols: 3 } }
+.card{
+  perspective: 1000px; position:relative; height: 0; padding-bottom: 130%;
+}
+.card-inner{
+  position:absolute; inset:0; border-radius: var(--radius); overflow:hidden; transform-style:preserve-3d; transition: transform .6s;
+  box-shadow: var(--shadow); background: var(--card);
+  border:1px solid rgba(255,255,255,.06);
+}
+.card.flipped .card-inner{ transform: rotateY(180deg) }
+.card-face{
+  position:absolute; inset:0; backface-visibility:hidden; display:flex; align-items:center; justify-content:center;
+}
+.card-face.front{
+  background:#0f1628 url('assets/pattern.webp') center/cover no-repeat; overflow:hidden;
+}
+.card-face.front img{ width:100%; height:100%; object-fit:cover; display:block; }
+.card-face.back{
+  background: linear-gradient(180deg, #0f1628, #0b1222);
+  transform: rotateY(180deg);
+  padding:10px; text-align:center; display:flex; align-items:center; justify-content:center;
+}
+.card-text{
+  font-size: clamp(.8rem, 1.2vw, 1rem); line-height:1.25; color:var(--text); word-break:break-word;
+}
+.footer{ max-width:1100px; margin: 0 auto; padding: 1rem; color: var(--muted); opacity:.9 }
+
+/* Editor modal */
+.editor{
+  position:fixed; inset:0; display:grid; place-items:center; background: rgba(8,12,22,.6);
+}
+.hidden{ display:none }
+.editor-card{
+  width: min(680px, 92vw);
+  background: var(--panel); border:1px solid rgba(255,255,255,.08);
+  border-radius: 16px; box-shadow: var(--shadow);
+}
+.editor-header{ display:flex; align-items:center; justify-content:space-between; padding: .9rem 1rem; border-bottom: 1px solid rgba(255,255,255,.08) }
+.editor-header h2{ margin:0; font-size:1.05rem }
+.icon-btn{ background:transparent; border:none; color:var(--text); font-size:1.6rem; cursor:pointer }
+.editor-body{ padding: 1rem; display:grid; gap: .9rem }
+.field{ display:grid; gap:.35rem }
+.field span{ font-size:.9rem; color: var(--muted) }
+.field input, .field textarea{
+  width:100%; padding:.65rem .7rem; border-radius: 10px; border: 1px solid rgba(255,255,255,.14);
+  background:#0e1526; color: var(--text);
+}
+.editor-actions{ display:flex; gap:.5rem; justify-content:flex-end }
+.small{ font-size:.85rem; color:var(--muted) }
